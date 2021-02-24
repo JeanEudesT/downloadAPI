@@ -14,7 +14,7 @@ export class VideosController {
             let total = info.size + downloaded
             console.log('size: ' + total)
             console.log(info);
-            const file = fs.createWriteStream('./videos/'+ info.title + '.mp4', { flags: 'a' });
+            const file = fs.createWriteStream('./videos/'+ info.id + '.mp4', { flags: 'a' });
             file.on('error', (err) => {
                 console.log(err);
                 res.send({err})
@@ -26,9 +26,8 @@ export class VideosController {
         video.on('end', () => {
             console.log('finished downloading!');
             res.send({
-                status: 200,
                 videoUrl: "",
-            });
+            }).status(200);
         })
     }
 }
